@@ -9,15 +9,15 @@ const MESSAGE_RATE_PER_SECOND = 20;
   //connect the message queing
   const connection = await amqplib.connect(amqpUrl, "heartbeat=60");
   const channel = await connection.createChannel();
-  const exchange = "myExchange";
-  const queue = "DemoData";
+  const xchange = "myExchange";
+  const que = "DemoData";
   const routingKey = "DemoData";
   try {
     console.log("Publishing");
 
-    await channel.assertExchange(exchange, "direct", { durable: true });
-    await channel.assertQueue(queue, { durable: true });
-    await channel.bindQueue(queue, exchange, routingKey);
+    await channel.assertExchange(xchange, "direct", { durable: true });
+    await channel.assertQueue(que, { durable: true });
+    await channel.bindQueue(que, exchange, routingKey);
 
     let i = 0;
     while (i < MESSAGE_RATE_PER_SECOND) {
