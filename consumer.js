@@ -14,6 +14,8 @@ server.listen(3002, () => {
   const socket = socketio(server, {
     cors: SOCKET_URL,
   });
+
+  //heartbeat=60 mean it will check the on ever  60 sec connection is still live or not ..
   const connection = await amqplib.connect(amqpUrl, "heartbeat=60");
   const channel = await connection.createChannel();
   channel.prefetch(10);
@@ -36,8 +38,8 @@ server.listen(3002, () => {
         // Delay for 50 milliseconds (20 messages per second)
         await new Promise((resolve) => setTimeout(resolve, 50));
         await channel.ack(msg);
-        socket.emit("message", data);
         // Emit the message to socket.io
+        socket.emit("message", data);
       }
     },
     {
