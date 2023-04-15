@@ -6,7 +6,7 @@ const amqpUrl = process.env.AMQP_URL || "amqp://localhost:5673";
 const MESSAGE_RATE_PER_SECOND = 20;
 
 (async () => {
-  //connect the message queing
+  //connect the message queing service( RabbbitMq )
   const connection = await amqplib.connect(amqpUrl, "heartbeat=60");
   const channel = await connection.createChannel();
   const xchange = "myExchange";
@@ -17,7 +17,7 @@ const MESSAGE_RATE_PER_SECOND = 20;
 
     await channel.assertExchange(xchange, "direct", { durable: true });
     await channel.assertQueue(que, { durable: true });
-    await channel.bindQueue(que, exchange, routingKey);
+    await channel.bindQueue(que, xchange, routingKey);
 
     let i = 0;
     while (i < MESSAGE_RATE_PER_SECOND) {
