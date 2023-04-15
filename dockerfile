@@ -1,24 +1,15 @@
-FROM node:18-alpine as base
-WORKDIR /src
+FROM node:18
+
+WORKDIR /usr/src/app
+
 COPY package*.json ./
+RUN npm install
 
-FROM base as production
-ENV NODE_ENV=production
-RUN npm ci
-COPY ./*.js ./
-CMD ["node", "consumer.js"]
+COPY . .
 
-FROM base as dev
-RUN apk add --no-cache bash
-#RUN wget -O /bin/wait-for-it.sh wait.sh
+#wait script
 COPY wait.sh /bin/wait-for-it.sh
-
 RUN chmod +x /bin/wait-for-it.sh
 
-ENV NODE_ENV=development
-RUN npm install
-COPY ./*.js ./
-
-EXPOSE 3002:3002
-CMD ["node", "consumer.js"]
+CMD [ "sh", "-c", "/usr/src/app/wait-for-it.sh rabbitmq:5672 --timeout=30 -- node consumer.js" ]
 

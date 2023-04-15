@@ -26,7 +26,7 @@ const MESSAGE_RATE_PER_SECOND = 20;
       const timestamp = Date.now();
       const priority = Math.floor(Math.random() * 10) + 1;
 
-      channel.sendToQueue(queue, Buffer.from(message), {
+      channel.sendToQueue(que, Buffer.from(message), {
         priority,
         timestamp,
       });

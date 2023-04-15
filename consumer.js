@@ -1,5 +1,5 @@
-const amqplib = require("amqplib");
 const socketio = require("socket.io");
+const amqplib = require("amqplib");
 const express = require("express");
 const app = express();
 const server = require("http").Server(app);
