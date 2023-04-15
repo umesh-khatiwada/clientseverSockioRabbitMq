@@ -5,6 +5,12 @@ const amqpUrl = process.env.AMQP_URL || 'amqp://localhost:5673';
 (async () => {
   const connection = await amqplib.connect(amqpUrl, 'heartbeat=60');
   const channel = await connection.createChannel();
+  const exchange = "myExchange";
+  const queue = "DemoData";
+  const routingKey = "DemoData";
+
+
+
   try {
     console.log('Publishing');
     
