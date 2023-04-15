@@ -2,7 +2,7 @@ const amqplib = require("amqplib");
 const { faker } = require("@faker-js/faker");
 const amqpUrl = process.env.AMQP_URL || "amqp://localhost:5673";
 
-// accept the 20 message for sec
+// accept the 20 message for per sec
 const MESSAGE_RATE_PER_SECOND = 20;
 
 (async () => {
