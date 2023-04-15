@@ -19,6 +19,10 @@ This will build the Docker image for the server.
 
   </ul>
   
+<h3>Referrenc</h3>
+<p> wait.sh will wait the rabbitmq to initalize and wait to the timeout ..</p>
+<a hred=""> reference link </a>
+
 <h3>Contributing </h3>
 If you would like to contribute to this project, feel free to submit a pull request.
 
